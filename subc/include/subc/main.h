@@ -4,4 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "subc/common.h"
+
 #endif // SUBC_MAIN_H
