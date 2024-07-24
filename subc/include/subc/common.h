@@ -35,6 +35,36 @@ enum exit_code
     EX_CONFIG        = 78, //* configuration error
 };
 
+#define ASSERT_WITH(expression, reason)                                       \
+    do                                                                        \
+    {                                                                         \
+        if (!(expression))                                                    \
+        {                                                                     \
+            assert_error(#expression, #reason, __FILE__, __func__, __LINE__); \
+            assert(false);                                                    \
+        }                                                                     \
+    } while (0)                                                               \
+
+#define ASSERT_BASE(expression) \
+    ASSERT_WITH(expression, "(none provided)")
+
+#define ASSERT_EXPAND(_1, _2, NAME, ...) NAME
+#define ASSERT(...) ASSERT_EXPAND(__VA_ARGS__, ASSERT_WITH, ASSERT_BASE)(__VA_ARGS__)
+
+#define FATAL(reason) \
+    fatal_error(reason, __FILE__, __func__, __LINE__)
+
+void* fatal_error(const char*  reason,
+                  const char*  file,
+                  const char*  function,
+                  const size_t line);
+
+void* assert_error(const char*  condition,
+                   const char*  reason,
+                   const char*  file,
+                   const char*  function,
+                   const size_t line);
+
 //! NOLINTEND
 
 #endif // SUBC_COMMON_H

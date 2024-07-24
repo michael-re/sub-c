@@ -2,6 +2,6 @@
 
 int main()
 {
-    printf("Hello World!\n");
+    FATAL("Hello World");
     return EX_SUCCESS;
 }
