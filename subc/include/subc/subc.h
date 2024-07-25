@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef SUBC_SUBC_H
 #define SUBC_SUBC_H
 
