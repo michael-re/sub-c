@@ -21,4 +21,18 @@
 #include "subc/buffer.h"
 #include "subc/fstream.h"
 
+
+
+// =============================================================================
+// debug macros
+// =============================================================================
+
+#ifdef NDEBUG
+#define DEBUG_OPEN_FILE false
+#else
+#define DEBUG_OPEN_FILE true
+#endif
+
+ifstream_t open_file(const char* name);
+
 #endif // SUBC_SUBC_H
