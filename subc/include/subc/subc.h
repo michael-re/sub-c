@@ -15,5 +15,6 @@
 // =============================================================================
 
 #include "subc/common.h"
+#include "subc/memory.h"
 
 #endif // SUBC_SUBC_H
