@@ -19,5 +19,6 @@
 #include "subc/common.h"
 #include "subc/memory.h"
 #include "subc/buffer.h"
+#include "subc/fstream.h"
 
 #endif // SUBC_SUBC_H
