@@ -1,4 +1,4 @@
-#include "subc/main.h"
+#include "subc/subc.h"
 
 int main()
 {
