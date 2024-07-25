@@ -35,15 +35,15 @@ enum exit_code
     EX_CONFIG        = 78, //* configuration error
 };
 
-#define ASSERT_WITH(expression, reason)                                       \
-    do                                                                        \
-    {                                                                         \
-        if (!(expression))                                                    \
-        {                                                                     \
-            assert_error(#expression, #reason, __FILE__, __func__, __LINE__); \
-            assert(false);                                                    \
-        }                                                                     \
-    } while (0)                                                               \
+#define ASSERT_WITH(expression, reason)                                      \
+    do                                                                       \
+    {                                                                        \
+        if (!(expression))                                                   \
+        {                                                                    \
+            assert_error(#expression, reason, __FILE__, __func__, __LINE__); \
+            assert(false);                                                   \
+        }                                                                    \
+    } while (0)                                                              \
 
 #define ASSERT_BASE(expression) \
     ASSERT_WITH(expression, "(none provided)")
