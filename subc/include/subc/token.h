@@ -51,4 +51,19 @@ typedef enum token_type
 } tok_type;
 const char* tok_type_string(tok_type type);
 
+// =============================================================================
+// token
+// =============================================================================
+typedef struct token
+{
+    tok_type type;
+    char*    lexeme;
+    size_t   length;
+    size_t   line;
+    size_t   column;
+} *token_t;
+
+token_t token_create(tok_type type, char* lexeme, size_t length, size_t line, size_t column);
+token_t token_delete(token_t self);
+
 #endif // SUBC_TOKEN_H
