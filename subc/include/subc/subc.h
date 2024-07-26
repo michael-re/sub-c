@@ -21,6 +21,8 @@
 #include "subc/buffer.h"
 #include "subc/fstream.h"
 
+#include "subc/token.h"
+
 
 
 // =============================================================================
