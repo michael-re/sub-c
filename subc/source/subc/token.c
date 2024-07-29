@@ -44,13 +44,12 @@ const char* tok_type_string(tok_type type)
 // token impl
 // =============================================================================
 
-token_t token_create(tok_type type, char* lexeme, size_t length, size_t line, size_t column)
+token_t token_create(tok_type type, string_t lexeme, size_t line, size_t column)
 {
     ASSERT(lexeme != NULL, "can't create token with empty lexeme");
     token_t self = NEW(self, 1);
     self->type   = type;
     self->lexeme = lexeme;
-    self->length = length;
     self->line   = line;
     self->column = column;
     return self;
@@ -60,7 +59,8 @@ token_t token_delete(token_t self)
 {
     if (self)
     {
-        (*self) = (struct token) { 0 };
+        self->lexeme = string_delete(self->lexeme);
+        (*self)      = (struct token) { 0 };
     }
 
     return DELETE(self);

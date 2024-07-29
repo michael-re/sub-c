@@ -4,6 +4,7 @@
 #define SUBC_TOKEN_H
 
 #include "subc/common.h"
+#include "subc/string.h"
 
 // =============================================================================
 // token type
@@ -57,13 +58,12 @@ const char* tok_type_string(tok_type type);
 typedef struct token
 {
     tok_type type;
-    char*    lexeme;
-    size_t   length;
+    string_t lexeme;
     size_t   line;
     size_t   column;
 } *token_t;
 
-token_t token_create(tok_type type, char* lexeme, size_t length, size_t line, size_t column);
+token_t token_create(tok_type type, string_t lexeme, size_t line, size_t column);
 token_t token_delete(token_t self);
 
 #endif // SUBC_TOKEN_H

@@ -5,8 +5,9 @@
 
 //! NOLINTBEGIN
 
-#include <limits.h>
 #include <assert.h>
+#include <limits.h>
+#include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
