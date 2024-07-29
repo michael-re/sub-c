@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "subc/token.h"
 #include "subc/memory.h"
 
@@ -64,6 +66,30 @@ token_t token_delete(token_t self)
     }
 
     return DELETE(self);
+}
+
+token_t token_report(token_t self, const char* header, const char* message)
+{
+    ASSERT(header  != NULL, "null report header");
+    ASSERT(message != NULL, "null message");
+
+    if (self)
+        printf("[%03zd:%03zd] ", self->line, self->column);
+
+    printf("%s", header);
+    if (self && self->type == TOK_EOF)
+    {
+        printf(" at end");
+    }
+    else if (self && self->type != TOK_BAD)
+    {
+        ASSERT_WITH(self->lexeme != NULL, "corrupted token");
+        printf(" at '%s'", self->lexeme->chars);
+    }
+
+    printf(": %s\n", message);
+    fflush(stdout);
+    return self;
 }
 
 // =============================================================================

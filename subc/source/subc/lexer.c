@@ -280,6 +280,9 @@ tkstream_t lex_tokens(ifstream_t source)
         token_t token = lexer_scan_token(lexer);
         ASSERT(token != NULL, "something went wrong in lexer_scan_token");
 
+        if (token->type == TOK_BAD)
+            token_report(token, "lex error", token->lexeme->chars);
+
         tkstream_append(tokens, token);
         if (token->type == TOK_EOF) break;
     }
