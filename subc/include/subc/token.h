@@ -4,6 +4,7 @@
 #define SUBC_TOKEN_H
 
 #include "subc/common.h"
+#include "subc/buffer.h"
 #include "subc/string.h"
 
 // =============================================================================
@@ -65,5 +66,19 @@ typedef struct token
 
 token_t token_create(tok_type type, string_t lexeme, size_t line, size_t column);
 token_t token_delete(token_t self);
+
+// =============================================================================
+// token stream
+// =============================================================================
+typedef struct tkstream
+{
+    buffer_t buffer;
+    size_t   size;
+    token_t* tokens;
+} *tkstream_t;
+
+tkstream_t tkstream_create(void);
+tkstream_t tkstream_delete(tkstream_t self);
+tkstream_t tkstream_append(tkstream_t self, token_t token);
 
 #endif // SUBC_TOKEN_H

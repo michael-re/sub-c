@@ -65,3 +65,38 @@ token_t token_delete(token_t self)
 
     return DELETE(self);
 }
+
+// =============================================================================
+// token stream impl
+// =============================================================================
+
+tkstream_t tkstream_create(void)
+{
+    tkstream_t self = NEW(self, 1);
+    self->buffer    = buffer_create(sizeof(*self->tokens), 0);
+    self->size      = 0;
+    self->tokens    = self->buffer->data;
+    return self;
+}
+
+tkstream_t tkstream_delete(tkstream_t self)
+{
+    if (self)
+    {
+        self->buffer = buffer_delete(self->buffer);
+        (*self)      = (struct tkstream) { 0 };
+    }
+
+    return DELETE(self);
+}
+
+tkstream_t tkstream_append(tkstream_t self, token_t token)
+{
+    ASSERT(self  != NULL, "can't append token to null stream");
+    ASSERT(token != NULL, "can't append null token to stream");
+
+    self->tokens = buffer_expand(self->buffer, self->size + 1);
+    const size_t index  = self->size++;
+    self->tokens[index] = token;
+    return self;
+}
