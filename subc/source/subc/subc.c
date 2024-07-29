@@ -48,7 +48,15 @@ tkstream_t tokenize(const char* name, ifstream_t source)
     if (DEBUG_TOKENIZE)
     {
         printf("=== DEBUG tokenize beg ===\n\n");
-        FATAL("debug tokenize unimplemented");
+        for (size_t i = 0; i < tokens->size; i++)
+        {
+            token_t token = tokens->tokens[i];
+            ASSERT(token       != NULL,    "corrupted token stream");
+            ASSERT(token->type != TOK_BAD, "corrupted token stream");
+            printf("[ %02d %-16s ] ", token->type, tok_type_string(token->type));
+            printf("(%04zd:%04zd) ",  token->line, token->column);
+            printf("%s\n",            token->lexeme->chars);
+        }
         printf("=== DEBUG tokenize end ===\n\n");
     }
 
