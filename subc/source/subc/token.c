@@ -83,6 +83,9 @@ tkstream_t tkstream_delete(tkstream_t self)
 {
     if (self)
     {
+        for (size_t i = 0; i < self->size; i++)
+            self->tokens[i] = token_delete(self->tokens[i]);
+
         self->buffer = buffer_delete(self->buffer);
         (*self)      = (struct tkstream) { 0 };
     }
