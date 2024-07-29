@@ -10,9 +10,10 @@ int main(const int argc, const char* argv[])
         return EX_DATA_ERROR;
     }
 
-    ifstream_t file = open_file(input);
-    ifstream_delete(file);
+    ifstream_t file   = open_file(input);
+    tkstream_t tokens = tokenize(input, file);
 
+    tkstream_delete(tokens);
     return EX_SUCCESS;
 }
 
@@ -33,4 +34,23 @@ ifstream_t open_file(const char* name)
     }
 
     return file;
+}
+
+tkstream_t tokenize(const char* name, ifstream_t source)
+{
+    tkstream_t tokens = lex_tokens(source);
+    if (!tokens)
+    {
+        printf("\nerror tokenizing '%s'\n\n", name ? name : "????");
+        exit(EX_DATA_ERROR);
+    }
+
+    if (DEBUG_TOKENIZE)
+    {
+        printf("=== DEBUG tokenize beg ===\n\n");
+        FATAL("debug tokenize unimplemented");
+        printf("=== DEBUG tokenize end ===\n\n");
+    }
+
+    return tokens;
 }
