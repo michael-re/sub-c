@@ -21,6 +21,7 @@
 #include "subc/buffer.h"
 #include "subc/fstream.h"
 
+#include "subc/ast.h"
 #include "subc/token.h"
 #include "subc/lexer.h"
 

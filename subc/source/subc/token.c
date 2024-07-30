@@ -42,6 +42,25 @@ const char* tok_type_string(tok_type type)
     return FATAL("unknown token type");
 }
 
+bool tok_type_is_bop(tok_type type)
+{
+    switch (type)
+    {
+        case TOK_OP_ADD:
+        case TOK_OP_MUL:
+        case TOK_OP_SUB:
+        case TOK_OP_EEQ:
+        case TOK_OP_NEQ:
+        case TOK_OP_GT:
+        case TOK_OP_GE:
+        case TOK_OP_LT:
+        case TOK_OP_LE:
+            return true;
+        default:
+            return false;
+    }
+}
+
 // =============================================================================
 // token impl
 // =============================================================================
@@ -66,6 +85,12 @@ token_t token_delete(token_t self)
     }
 
     return DELETE(self);
+}
+
+token_t token_clone(token_t self)
+{
+    ASSERT(self != NULL, "cloning null token");
+    return token_create(self->type, string_clone(self->lexeme), self->line, self->column);
 }
 
 token_t token_report(token_t self, const char* header, const char* message)

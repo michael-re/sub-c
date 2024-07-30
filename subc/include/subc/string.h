@@ -20,6 +20,7 @@ typedef struct string
 
 string_t string_create(const char* format, ...);
 string_t string_delete(string_t self);
+string_t string_clone (string_t self);
 string_t string_hash  (string_t self);
 string_t string_format(string_t self, const char* format, va_list args);
 string_t string_append(string_t self, const char* format, ...);

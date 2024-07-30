@@ -14,6 +14,9 @@ reallocate(pointer, sizeof(*(pointer)) * (old_count), sizeof(*(pointer)) * (new_
 #define DELETE(pointer) \
 deallocate(pointer)
 
+#define ANY_CAST(pointer) \
+((void*) pointer)
+
 void* reallocate(void* block, const size_t old_size, const size_t new_size);
 void* deallocate(void* block);
 

@@ -38,6 +38,12 @@ string_t string_delete(string_t self)
     return DELETE(self);
 }
 
+string_t string_clone(string_t self)
+{
+    ASSERT(self != NULL, "cloning null string");
+    return string_create("%s", self->chars);
+}
+
 string_t string_hash(string_t self)
 {
     ASSERT(self         != NULL, "can't hash null string");

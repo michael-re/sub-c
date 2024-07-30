@@ -52,6 +52,7 @@ typedef enum token_type
     TOK_EOF,          // end of file
 } tok_type;
 const char* tok_type_string(tok_type type);
+bool        tok_type_is_bop(tok_type type);
 
 // =============================================================================
 // token
@@ -66,6 +67,7 @@ typedef struct token
 
 token_t token_create(tok_type type, string_t lexeme, size_t line, size_t column);
 token_t token_delete(token_t self);
+token_t token_clone (token_t self);
 token_t token_report(token_t self, const char* header, const char* message);
 
 // =============================================================================
