@@ -11,9 +11,10 @@ int main(const int argc, const char* argv[])
     }
 
     ifstream_t file   = open_file(input);
-    tkstream_t tokens = tokenize(input, file);
+    tkstream_t tokens = tokenize (input, file);
+    ast_t      ast    = parse    (input, tokens);
 
-    tkstream_delete(tokens);
+    ast_delete(ast);
     return EX_SUCCESS;
 }
 
@@ -61,4 +62,23 @@ tkstream_t tokenize(const char* name, ifstream_t source)
     }
 
     return tokens;
+}
+
+ast_t parse(const char* name, tkstream_t source)
+{
+    ast_t ast = parse_program(source);
+    if (!ast)
+    {
+        printf("\nerror parsing '%s'\n\n", name ? name : "????");
+        exit(EX_DATA_ERROR);
+    }
+
+    if (DEBUG_PARSE)
+    {
+        printf("=== DEBUG parse beg ===\n\n");
+        FATAL("TODO: implement ast pretty printer");
+        printf("=== DEBUG parse end ===\n\n");
+    }
+
+    return ast;
 }

@@ -24,6 +24,7 @@
 #include "subc/ast.h"
 #include "subc/token.h"
 #include "subc/lexer.h"
+#include "subc/parser.h"
 
 
 
@@ -34,9 +35,11 @@
 #ifdef NDEBUG
 #define DEBUG_OPEN_FILE false
 #define DEBUG_TOKENIZE  false
+#define DEBUG_PARSE     false
 #else
 #define DEBUG_OPEN_FILE true
 #define DEBUG_TOKENIZE  true
+#define DEBUG_PARSE     true
 #endif
 
 
@@ -47,5 +50,6 @@
 
 ifstream_t open_file(const char* name);
 tkstream_t tokenize (const char* name, ifstream_t source);
+ast_t      parse    (const char* name, tkstream_t source);
 
 #endif // SUBC_SUBC_H
