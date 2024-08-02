@@ -287,12 +287,10 @@ ast_t ast_if_create(ast_t expr, ast_t block)
         return NULL;
     }
 
-    ASSERT(block->type == AST_LIST, "invalid if block");
-
     ast_if self     = NEW(self, 1);
     self->base.type = AST_IF;
     self->expr      = expr;
-    self->block     = ANY_CAST(block);
+    self->block     = block;
     return ANY_CAST(self);
 }
 
@@ -391,12 +389,10 @@ ast_t ast_while_create(ast_t expr, ast_t block)
         return NULL;
     }
 
-    ASSERT(block->type == AST_LIST, "invalid while block");
-
     ast_while self  = NEW(self, 1);
     self->base.type = AST_WHILE;
     self->expr      = expr;
-    self->block     = ANY_CAST(block);
+    self->block     = block;
     return ANY_CAST(self);
 }
 

@@ -111,9 +111,9 @@ ast_t ast_func_create(ast_t name, ast_t pars, ast_t vars, ast_t stmts);
 // =============================================================================
 typedef struct ast_if
 {
-    base_t   base;
-    ast_t    expr;
-    ast_list block;
+    base_t base;
+    ast_t  expr;
+    ast_t  block;
 } *ast_if;
 ast_t ast_if_create(ast_t expr, ast_t block);
 
@@ -154,9 +154,9 @@ ast_t ast_string_create(token_t token);
 // =============================================================================
 typedef struct ast_while
 {
-    base_t   base;
-    ast_t    expr;
-    ast_list block;
+    base_t base;
+    ast_t  expr;
+    ast_t  block;
 } *ast_while;
 ast_t ast_while_create(ast_t expr, ast_t block);
 

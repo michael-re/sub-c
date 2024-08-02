@@ -226,7 +226,7 @@ static ast_t parser_parse_if(parser_t self)
     parser_consume(self, TOK_LEFT_PAREN,  "expect '(' before 'if' condition");
     ast_t expr  = parser_parse_expression(self);
     parser_consume(self, TOK_RIGHT_PAREN, "expect ')' after 'if' condition");
-    ast_t block = parser_parse_block(self);
+    ast_t block = parser_parse_statement(self);
     return parser_result(self, ast_if_create(expr, block));
 }
 
@@ -244,7 +244,7 @@ static ast_t parser_parse_while(parser_t self)
     parser_consume(self, TOK_LEFT_PAREN,  "expect '(' before 'while' condition");
     ast_t expr  = parser_parse_expression(self);
     parser_consume(self, TOK_RIGHT_PAREN, "expect ')' after 'while' condition");
-    ast_t block = parser_parse_block(self);
+    ast_t block = parser_parse_statement(self);
     return parser_result(self, ast_while_create(expr, block));
 }
 

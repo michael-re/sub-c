@@ -18,9 +18,9 @@ statement   => assign
              | while
 
 assign      => name "="  ( expression | call ) ";"
-if          => "if"     "(" expression ")" block
+if          => "if"     "(" expression ")" statement
 return      => "return"     expression     ";"
-while       => "while"  "(" expression ")" block
+while       => "while"  "(" expression ")" statement
 
 block       => "{" statement+ "}"
 primary     => name    | number
