@@ -11,12 +11,13 @@ parameter   => "int" name
 
 body        => "{" variable* statement+ "}"
 variable    => "int" name ";"
-statement   => assign
-             | block
+statement   => block
+             | expr_stmt
              | if
              | return
              | while
 
+expr_stmt   => call | assign
 assign      => name "="  ( expression | call ) ";"
 if          => "if"     "(" expression ")" statement
 return      => "return"     expression     ";"

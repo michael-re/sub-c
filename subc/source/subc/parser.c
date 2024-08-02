@@ -25,6 +25,7 @@ static ast_t    parser_parse_function  (parser_t self);
 static ast_t    parser_parse_parameters(parser_t self);
 static ast_t    parser_parse_variable  (parser_t self);
 static ast_t    parser_parse_statement (parser_t self);
+static ast_t    parser_parse_expr_stmt (parser_t self);
 static ast_t    parser_parse_assign    (parser_t self);
 static ast_t    parser_parse_block     (parser_t self);
 static ast_t    parser_parse_if        (parser_t self);
@@ -183,13 +184,25 @@ static ast_t parser_parse_statement(parser_t self)
 {
     switch (parser_current(self)->type)
     {
-        case TOK_IF:         return parser_parse_if    (self);
-        case TOK_LEFT_BRACE: return parser_parse_block  (self);
-        case TOK_NAME:       return parser_parse_assign (self);
-        case TOK_RETURN:     return parser_parse_return(self);
-        case TOK_WHILE:      return parser_parse_while (self);
-        default:             return parser_error(self, "expect statement");
+        case TOK_IF:         return parser_parse_if       (self);
+        case TOK_LEFT_BRACE: return parser_parse_block    (self);
+        case TOK_NAME:       return parser_parse_expr_stmt(self);
+        case TOK_RETURN:     return parser_parse_return   (self);
+        case TOK_WHILE:      return parser_parse_while    (self);
+        default:             return parser_error          (self, "expect statement");
     }
+}
+
+static ast_t parser_parse_expr_stmt(parser_t self)
+{
+    const size_t current = self->cursor;
+    parser_advance(self);
+    const bool is_assign = parser_check(self, TOK_EQUAL);
+    self->cursor = current;
+
+    ast_t stmt = is_assign ? parser_parse_assign(self) : parser_parse_call(self);
+    parser_consume(self, TOK_SEMICOLON, "expect ';' after expression statement");
+    return parser_result(self, stmt);
 }
 
 static ast_t parser_parse_assign(parser_t self)
@@ -204,7 +217,6 @@ static ast_t parser_parse_assign(parser_t self)
     self->cursor = cursor;
     ast_t value  = call ? parser_parse_call(self) : parser_parse_expression(self);
 
-    parser_consume(self, TOK_SEMICOLON, "expect ';' after assign value");
     return parser_result(self, ast_assign_create(name, value));
 }
 
