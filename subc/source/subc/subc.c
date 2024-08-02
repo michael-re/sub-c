@@ -76,7 +76,7 @@ ast_t parse(const char* name, tkstream_t source)
     if (DEBUG_PARSE)
     {
         printf("=== DEBUG parse beg ===\n\n");
-        FATAL("TODO: implement ast pretty printer");
+        pretty_print_ast(ast);
         printf("=== DEBUG parse end ===\n\n");
     }
 

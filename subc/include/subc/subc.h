@@ -25,6 +25,7 @@
 #include "subc/token.h"
 #include "subc/lexer.h"
 #include "subc/parser.h"
+#include "subc/printer.h"
 
 
 

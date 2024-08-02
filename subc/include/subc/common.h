@@ -47,7 +47,7 @@ enum exit_code
 // assert
 // =============================================================================
 
-#define ASSERT_WITH(expression, reason)                                      \
+#define ASSERT(expression, reason)                                           \
     do                                                                       \
     {                                                                        \
         if (!(expression))                                                   \
@@ -56,12 +56,6 @@ enum exit_code
             assert(false);                                                   \
         }                                                                    \
     } while (0)                                                              \
-
-#define ASSERT_BASE(expression) \
-    ASSERT_WITH(expression, "(none provided)")
-
-#define ASSERT_EXPAND(_1, _2, NAME, ...) NAME
-#define ASSERT(...) ASSERT_EXPAND(__VA_ARGS__, ASSERT_WITH, ASSERT_BASE)(__VA_ARGS__)
 
 void* assert_error(const char*  condition,
                    const char*  reason,

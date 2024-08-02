@@ -108,7 +108,7 @@ token_t token_report(token_t self, const char* header, const char* message)
     }
     else if (self && self->type != TOK_BAD)
     {
-        ASSERT_WITH(self->lexeme != NULL, "corrupted token");
+        ASSERT(self->lexeme != NULL, "corrupted token");
         printf(" at '%s'", self->lexeme->chars);
     }
 
