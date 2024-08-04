@@ -20,6 +20,7 @@
 #include "subc/memory.h"
 #include "subc/buffer.h"
 #include "subc/fstream.h"
+#include "subc/hashmap.h"
 
 #include "subc/ast.h"
 #include "subc/token.h"
