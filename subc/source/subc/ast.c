@@ -40,7 +40,8 @@ ast_t ast_delete(ast_t self)
         default:         break;
     }
 
-    return FATAL("calling delete on ast with an unknown type");
+    FATAL("calling delete on ast with an unknown type");
+    return self;
 }
 
 // =============================================================================
@@ -65,7 +66,8 @@ const char* ast_type_string(ast_type type)
         default:         break;
     }
 
-    return FATAL("unknown ast type");
+    FATAL("unknown ast type");
+    return "";
 }
 
 // =============================================================================

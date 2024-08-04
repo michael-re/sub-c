@@ -53,15 +53,14 @@ enum exit_code
         if (!(expression))                                                   \
         {                                                                    \
             assert_error(#expression, reason, __FILE__, __func__, __LINE__); \
-            assert(false);                                                   \
         }                                                                    \
     } while (0)                                                              \
 
-void* assert_error(const char*  condition,
-                   const char*  reason,
-                   const char*  file,
-                   const char*  function,
-                   const size_t line);
+_Noreturn void assert_error(const char*  condition,
+                            const char*  reason,
+                            const char*  file,
+                            const char*  function,
+                            const size_t line);
 
 // =============================================================================
 // fatal
@@ -70,10 +69,10 @@ void* assert_error(const char*  condition,
 #define FATAL(reason) \
     fatal_error(reason, __FILE__, __func__, __LINE__)
 
-void* fatal_error(const char*  reason,
-                  const char*  file,
-                  const char*  function,
-                  const size_t line);
+_Noreturn void fatal_error(const char*  reason,
+                           const char*  file,
+                           const char*  function,
+                           const size_t line);
 
 //! NOLINTEND
 

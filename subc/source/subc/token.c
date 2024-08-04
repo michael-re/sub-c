@@ -39,7 +39,8 @@ const char* tok_type_string(tok_type type)
         default:              break;
     }
 
-    return FATAL("unknown token type");
+    FATAL("unknown token type");
+    return "";
 }
 
 bool tok_type_is_bop(tok_type type)
