@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <inttypes.h>
 
 
 
@@ -38,10 +39,12 @@
 #define DEBUG_OPEN_FILE false
 #define DEBUG_TOKENIZE  false
 #define DEBUG_PARSE     false
+#define DEBUG_ANALYZE   false
 #else
 #define DEBUG_OPEN_FILE true
 #define DEBUG_TOKENIZE  true
 #define DEBUG_PARSE     true
+#define DEBUG_ANALYZE   true
 #endif
 
 

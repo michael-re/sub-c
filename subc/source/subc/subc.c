@@ -30,9 +30,9 @@ ifstream_t open_file(const char* name)
 
     if (DEBUG_OPEN_FILE)
     {
-        printf("\n=== DEBUG open file beg ===\n");
+        printf("\n=== DEBUG file stream beg ===\n");
         printf("%.*s\n", (int) file->size, file->data);
-        printf("=== DEBUG open file end ===\n\n");
+        printf("=== DEBUG file stream end ===\n\n");
     }
 
     return file;
@@ -49,7 +49,7 @@ tkstream_t tokenize(const char* name, ifstream_t source)
 
     if (DEBUG_TOKENIZE)
     {
-        printf("=== DEBUG tokenize beg ===\n\n");
+        printf("=== DEBUG token stream beg ===\n\n");
         for (size_t i = 0; i < tokens->size; i++)
         {
             token_t token = tokens->tokens[i];
@@ -59,7 +59,7 @@ tkstream_t tokenize(const char* name, ifstream_t source)
             printf("(%04zd:%04zd) ",  token->line, token->column);
             printf("%s\n",            token->lexeme->chars);
         }
-        printf("=== DEBUG tokenize end ===\n\n");
+        printf("=== DEBUG token stream end ===\n\n");
     }
 
     return tokens;
@@ -76,9 +76,9 @@ ast_t parse(const char* name, tkstream_t source)
 
     if (DEBUG_PARSE)
     {
-        printf("=== DEBUG parse beg ===\n\n");
+        printf("=== DEBUG abstract syntax tree beg ===\n\n");
         pretty_print_ast(ast);
-        printf("=== DEBUG parse end ===\n\n");
+        printf("=== DEBUG abstract syntax tree end ===\n\n");
     }
 
     return ast;
@@ -91,6 +91,36 @@ symtable_t analyze(const char* name, ast_t source)
     {
         printf("\nerror generating symbol table for '%s'\n\n", name ? name : "????");
         exit(EX_DATA_ERROR);
+    }
+
+    if (DEBUG_ANALYZE)
+    {
+                printf("\n=== DEBUG symbol table beg ===\n");
+        for (size_t i = 0; i < table->indicies->size; i++)
+        {
+            const layout_t layout = table->layouts[i];
+            ASSERT(layout != NULL, "invalid symbol table");
+
+            printf("\n=====================================\n");
+            printf("| layout(%zd:%zd): '%s' \n", layout->function->name->token->line,
+                                                 layout->function->name->token->column,
+                                                 layout->function->name->token->lexeme->chars);
+
+            printf("+---------+---------+---------+-----\n");
+            printf("| type    | role    | offset  | name\n");
+            printf("+---------+---------+---------+-----\n");
+            for (size_t j = 0; j < table->layouts[i]->indicies->size; j++)
+            {
+                const symbol_t symbol = &layout->symbols[j];
+                const char*    type   = sym_type_string(symbol->type);
+                const char*    role   = sym_role_string(symbol->role);
+                const int64_t  offset = symbol->offset;
+                printf("| %s   %s   %04" PRId64 "      '%s'\n", type, role, offset, symbol->name->lexeme->chars);
+            }
+
+            printf("| index: %04zd\n", layout->offset);
+        }
+        printf("\n=== DEBUG symbol table end ===\n\n");
     }
 
     return table;
