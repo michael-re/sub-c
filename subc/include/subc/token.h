@@ -69,6 +69,7 @@ token_t token_create(tok_type type, string_t lexeme, size_t line, size_t column)
 token_t token_delete(token_t self);
 token_t token_clone (token_t self);
 token_t token_report(token_t self, const char* header, const char* message);
+bool    token_cmp_eq(token_t self, token_t other);
 
 // =============================================================================
 // token stream

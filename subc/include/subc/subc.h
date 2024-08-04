@@ -25,9 +25,9 @@
 #include "subc/ast.h"
 #include "subc/token.h"
 #include "subc/lexer.h"
+#include "subc/table.h"
 #include "subc/parser.h"
 #include "subc/printer.h"
-
 
 
 // =============================================================================
@@ -53,5 +53,6 @@
 ifstream_t open_file(const char* name);
 tkstream_t tokenize (const char* name, ifstream_t source);
 ast_t      parse    (const char* name, tkstream_t source);
+symtable_t analyze  (const char* name, ast_t source);
 
 #endif // SUBC_SUBC_H

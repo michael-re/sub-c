@@ -13,8 +13,8 @@ string_t string_create(const char* format, ...)
     string_t self = NEW(self, 1);
     self->buffer  = buffer_create(sizeof(*self->chars), 0);
     self->size    = 0;
-    self->hash    = 0;
     self->chars   = self->buffer->data;
+    self->hash    = 0;
 
     if (format)
     {
@@ -50,7 +50,7 @@ string_t string_hash(string_t self)
     ASSERT(self->buffer != NULL, "corrupted string buffer");
     ASSERT(self->chars  != NULL, "corrupted string buffer");
 
-    if (self->hashed)
+    if (self->hash != 0)
         return self;
 
     self->hash = 0xcbf29ce484222325;
@@ -87,6 +87,7 @@ string_t string_format(string_t self, const char* format, va_list args)
 
     ASSERT(written == format_ssize, "vsnprintf failed when it shouldn't have");
     self->size     += (size_t) written;
+    self->hash      = 0;
     return self;
 }
 
@@ -116,7 +117,7 @@ string_t string_remove(string_t self, size_t start, size_t count)
     {
         memmove(dst, src, self->size - cnt - start); //! NOLINT
         self->size      -= cnt;
-        self->hashed     = false;
+        self->hash       = 0;
         void*  removed   = self->chars + self->size;
         size_t remaining = self->buffer->capacity - self->size;
         memset(removed, 0x0, remaining); //! NOLINT

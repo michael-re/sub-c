@@ -15,7 +15,6 @@ typedef struct string
     size_t   size;
     char*    chars;
     size_t   hash;
-    bool     hashed;
 } *string_t;
 
 string_t string_create(const char* format, ...);

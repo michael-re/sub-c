@@ -92,7 +92,7 @@ entry_t hashmap_retrieve(hashmap_t self, string_t key)
     ASSERT(self->buffer != NULL, "corrupted hashmap");
     const size_t capacity = self->buffer->capacity - 1;
 
-    for (size_t i = key->hash & (capacity);; i = (i + 1) & capacity)
+    for (size_t i = string_hash(key)->hash & (capacity);; i = (i + 1) & capacity)
     {
         entry_t entry = &self->entries[i];
         if (!entry->key)                    return entry;

@@ -13,8 +13,9 @@ int main(const int argc, const char* argv[])
     ifstream_t file   = open_file(input);
     tkstream_t tokens = tokenize (input, file);
     ast_t      ast    = parse    (input, tokens);
+    symtable_t table  = analyze  (input, ast);
 
-    ast_delete(ast);
+    symtable_delete(table);
     return EX_SUCCESS;
 }
 
@@ -81,4 +82,16 @@ ast_t parse(const char* name, tkstream_t source)
     }
 
     return ast;
+}
+
+symtable_t analyze(const char* name, ast_t source)
+{
+    symtable_t table = symtable_create(source);
+    if (!table)
+    {
+        printf("\nerror generating symbol table for '%s'\n\n", name ? name : "????");
+        exit(EX_DATA_ERROR);
+    }
+
+    return table;
 }

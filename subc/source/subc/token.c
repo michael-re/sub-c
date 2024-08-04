@@ -118,6 +118,13 @@ token_t token_report(token_t self, const char* header, const char* message)
     return self;
 }
 
+bool token_cmp_eq(token_t self, token_t other)
+{
+    if (!self && !other) return true;
+    if (!self || !other) return false;
+    return string_cmp_eq(self->lexeme, other->lexeme);
+}
+
 // =============================================================================
 // token stream impl
 // =============================================================================
