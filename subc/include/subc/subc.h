@@ -29,6 +29,9 @@
 #include "subc/table.h"
 #include "subc/parser.h"
 #include "subc/printer.h"
+#include "subc/emitter.h"
+#include "subc/codegen.h"
+
 
 
 // =============================================================================

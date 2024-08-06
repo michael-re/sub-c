@@ -2,7 +2,8 @@
 
 int main(const int argc, const char* argv[])
 {
-    const char* input = argc >= 2 ? argv[1] : NULL;
+    const char* input  = argc >= 2 ? argv[1] : NULL;
+    const char* output = argc >= 3 ? argv[2] : input;
 
     if (input == NULL)
     {
@@ -10,12 +11,24 @@ int main(const int argc, const char* argv[])
         return EX_DATA_ERROR;
     }
 
-    ifstream_t file   = open_file(input);
-    tkstream_t tokens = tokenize (input, file);
-    ast_t      ast    = parse    (input, tokens);
-    symtable_t table  = analyze  (input, ast);
+    ifstream_t file   = open_file   (input);
+    tkstream_t tokens = tokenize    (input, file);
+    ast_t      ast    = parse       (input, tokens);
+    symtable_t table  = analyze     (input, ast);
+    emitter_t  armv7  = gen_armv7asm(table);
 
-    symtable_delete(table);
+    if (!armv7)
+    {
+        printf("\nerror generating arm-v7 asm for '%s'\n\n", input);
+        return EX_DATA_ERROR;
+    }
+
+    if (!emitter_save(armv7, output))
+    {
+        printf("\nerror writing generated arm-v7 asm file to disk\n\n");
+        return EX_IO_ERROR;
+    }
+
     return EX_SUCCESS;
 }
 
