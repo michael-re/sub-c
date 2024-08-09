@@ -38,16 +38,16 @@
 // debug macros
 // =============================================================================
 
-#ifdef NDEBUG
-#define DEBUG_OPEN_FILE false
-#define DEBUG_TOKENIZE  false
-#define DEBUG_PARSE     false
-#define DEBUG_ANALYZE   false
-#else
+#ifdef SUBC_DEBUG_MODE
 #define DEBUG_OPEN_FILE true
 #define DEBUG_TOKENIZE  true
 #define DEBUG_PARSE     true
 #define DEBUG_ANALYZE   true
+#else
+#define DEBUG_OPEN_FILE false
+#define DEBUG_TOKENIZE  false
+#define DEBUG_PARSE     false
+#define DEBUG_ANALYZE   false
 #endif
 
 

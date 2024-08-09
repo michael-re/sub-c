@@ -1,3 +1,4 @@
+// #define SUBC_DEBUG_MODE
 #include "subc/subc.h"
 
 int main(const int argc, const char* argv[])
