@@ -130,7 +130,7 @@ bool string_cmp_eq(string_t self, string_t other)
 {
     if (!self && !other) return true;
     if (!self || !other) return false;
-    return (self->size = other->size)
+    return (self->size == other->size)
         && (string_hash(self)->hash == string_hash(other)->hash)
         && (memcmp(self->chars, other->chars, self->size) == 0);
 }
