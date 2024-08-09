@@ -2,6 +2,21 @@
 
 A compiler for a strict subset of the C programming language.
 
+```c
+int main()
+{
+    __says("Hello World!"); // print string using built-in function __says
+    __sayl();               // print newline using built-in function __sayl
+    return 0;
+}
+```
+
+## Grammar
+
+For detailed information about the syntax and structure supported by the Sub-C
+Compiler, please refer to the [**`grammar.md`**](docs/grammar.md) file in the
+docs folder.
+
 ## Getting Started
 
 ### Prerequisites

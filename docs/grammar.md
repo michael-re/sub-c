@@ -1,5 +1,10 @@
 # Sub-C Grammar
 
+- **Built-in Output Functions**:
+  - `__says`: Print null-terminated string to `stdout`.
+  - `__sayn`: Print integer to `stdout`.
+  - `__sayl`: Print newline to `stdout`.
+
 ```txt
 program     => function+
 
