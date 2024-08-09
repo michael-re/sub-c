@@ -42,7 +42,6 @@ const char* sym_type_string(sym_type type)
     }
 
     FATAL("unknown symbol type");
-    return "";
 }
 
 // =============================================================================
@@ -60,7 +59,6 @@ const char* sym_role_string(sym_role role)
     }
 
     FATAL("unknown symbol role");
-    return "";
 }
 
 // =============================================================================
@@ -143,7 +141,6 @@ static layout_t layout_visit(layout_t self, context_t ctx, ast_t ast)
     }
 
     FATAL("unknown ast type");
-    return self;
 }
 
 static layout_t layout_visit_assign(layout_t self, context_t ctx, ast_t ast)

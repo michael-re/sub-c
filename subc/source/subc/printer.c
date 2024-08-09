@@ -135,7 +135,6 @@ static printer_t printer_print_ast(printer_t self, ast_t ast)
     }
 
     FATAL("unknown ast type");
-    return self;
 }
 
 static printer_t printer_print_assign(printer_t self, ast_t ast)

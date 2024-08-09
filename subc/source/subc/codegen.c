@@ -186,7 +186,6 @@ static codegen_t codegen_emit(codegen_t self, ast_t ast)
     }
 
     FATAL("unknown ast type");
-    return self;
 }
 
 static codegen_t codegen_emit_assign(codegen_t self, ast_t ast)
@@ -245,8 +244,6 @@ static codegen_t codegen_emit_binary(codegen_t self, ast_t ast)
         case TOK_OP_LT:  return codegen_branch(self, "blt");
         default:         FATAL("invalid binary operator");
     }
-
-    return self;
 }
 
 static codegen_t codegen_emit_call(codegen_t self, ast_t ast)
@@ -413,7 +410,6 @@ static codegen_t codegen_emit_string(codegen_t self, ast_t ast)
 {
     ASSERT(self && ast && ast->type == AST_STRING, "invalid args");
     FATAL("should never visit ast_string");
-    return self;
 }
 
 static codegen_t codegen_emit_while(codegen_t self, ast_t ast)

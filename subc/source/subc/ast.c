@@ -41,7 +41,6 @@ ast_t ast_delete(ast_t self)
     }
 
     FATAL("calling delete on ast with an unknown type");
-    return self;
 }
 
 // =============================================================================
@@ -67,7 +66,6 @@ const char* ast_type_string(ast_type type)
     }
 
     FATAL("unknown ast type");
-    return "";
 }
 
 // =============================================================================
