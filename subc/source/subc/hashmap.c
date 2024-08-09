@@ -51,7 +51,7 @@ hashmap_t hashmap_resize(hashmap_t self, size_t min_capacity)
 
     for (size_t i = 0; old_buffer && i < old_buffer->capacity; i++)
     {
-        entry_t src = ((entry_t) (old_buffer)) + i;
+        entry_t src = ((entry_t) (old_buffer->data)) + i;
         if (!src || !src->key) continue;
 
         entry_t dst = hashmap_retrieve(self, src->key);
